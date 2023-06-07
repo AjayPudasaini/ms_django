@@ -1,0 +1,60 @@
+syntax = "proto3";
+package users;
+
+service Users {
+    rpc GetUsers(GetUsersRequest) returns (GetUsersResponse) {}
+    rpc GetUserById(GetUserByIdRequest) returns (GetUserByIdResponse) {}
+    rpc UpdateUser(UpdateUserRequest) returns (UpdateUserResponse) {}
+    rpc DeleteUser(DeleteUserRequest) returns (DeleteUserResponse) {}
+    rpc CreateUser(CreateUserRequest) returns (CreateUserResponse) {}
+}
+
+message User {
+    int32 id = 1;
+    string username = 2;
+    string full_name = 3;
+    string phone_number = 4;
+    string email = 5;
+    string password = 6;
+}
+
+message GetUsersRequest {
+}
+
+message GetUsersResponse {
+    repeated User users = 1;
+}
+
+message GetUserByIdRequest {
+    string id = 1;
+}
+
+message GetUserByIdResponse {
+    User users = 1;
+}
+
+message UpdateUserRequest {
+    User users = 1;
+}
+
+message UpdateUserResponse {
+    User users = 1;
+}
+
+message DeleteUserRequest {
+    User users = 1;
+}
+
+message DeleteUserResponse {
+    User users = 1;
+}
+
+message CreateUserRequest {
+    User user = 1;
+}
+
+message CreateUserResponse {
+    User user = 1;
+}
+
+// $ python3 -m grpc_tools.protoc -I./protos --python_out=. --pyi_out=. --grpc_python_out=. ./protos/users.proto

@@ -1,0 +1,30 @@
+version: '3'
+
+services:
+  user:
+    build:
+      context: .
+      dockerfile: user/Dockerfile
+    container_name: ms_django_user_app_container_v1
+    command: bash -c "python user/manage.py migrate && python user/manage.py runserver 0.0.0.0:8000"
+    image: ms_django_user_app_img_v1
+    volumes:
+      - .:/ms_django_user_app_v1
+    ports:
+      - "8000:8000"
+    expose:
+      - '8000'
+  
+  posts:
+    build:
+      context: .
+      dockerfile: posts/Dockerfile
+    container_name: ms_django_posts_app_container_v1
+    command: bash -c "python posts/manage.py migrate && python posts/manage.py runserver 0.0.0.0:8001"
+    image: ms_django_posts_app_img_v1
+    volumes:
+      - .:/ms_django_posts_app_v1
+    ports:
+      - "8001:8001"
+    expose:
+      - '8001'
